@@ -19,8 +19,8 @@ using pdd = pair<ld,ld>;
 #define mp(a,b) make_pair(a,b)
 #define cans cout<<ans<<endl
 #define in cout<<"in lar"<<endl
-#define sort_uni(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
-#define get(c,x) (lower_bound(c.begin(),c.end(),x)-c.begin())
+#define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
+#define GET_POS(c,x) (lower_bound(c.begin(),c.end(),x)-c.begin())
 template<typename T1,typename T2>
 ostream& operator<<(ostream& out,pair<T1,T2> P){
     out<<'('<<P.F<<','<<P.S<<')';
@@ -46,9 +46,38 @@ ll mypow(ll a,ll b){
     return res;
 }
 
-/******good luck******/
+const int maxn=1e5+5;
+
+vector<int> edge[maxn];
+int deep,now=-1,dst;
+
+void dfs(int a,int f){
+    now++;
+    if(now>deep){
+        deep=now;
+        dst=a;
+    }
+    for(int b:edge[a]){
+        if(b==f)
+            continue;
+        dfs(b,a);
+        now--;
+    }
+}
 
 int32_t main(){
     IOS;
+    int n;
+    cin>>n;
+    rep(i,n-1){
+        int a,b;
+        cin>>a>>b;
+        edge[a].eb(b);
+        edge[b].eb(a);
+    }
+    dfs(0,0);
+    now=-1;
+    dfs(dst,dst);
+    cout<<deep<<endl;
     return 0;
 }

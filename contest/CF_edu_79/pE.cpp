@@ -8,17 +8,14 @@ using pll = pair<ll,ll>;
 using pdd = pair<ld,ld>;
 #define IOS ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl '\n'
-#define all(a) a.begin(),a.end()
-#define sz(a) ((int)a.size())
+#define ALL(a) a.begin(),a.end()
+#define SZ(a) ((int)a.size())
 #define F first
 #define S second
-#define rep(i,n) for(int i=0;i<(int)n;i++)
-#define rep1(i,n) for(int i=1;i<(int)n;i++)
+#define rep(i,n) for(int i=0;i<((int)n);i++)
 #define pb push_back
-#define eb emplace_back
-#define mp(a,b) make_pair(a,b)
+#define MP(a,b) make_pair(a,b)
 #define cans cout<<ans<<endl
-#define in cout<<"in lar"<<endl
 #define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
 #define GET_POS(c,x) (lower_bound(c.begin(),c.end(),x)-c.begin())
 template<typename T1,typename T2>
@@ -28,6 +25,8 @@ ostream& operator<<(ostream& out,pair<T1,T2> P){
 }
 
 //}}}
+const ll maxn=2005;
+const ll maxlg=__lg(maxn)+2;
 const ll INF64=8000000000000000000LL;
 const int INF=0x3f3f3f3f;
 const ll MOD=ll(1e9+7);
@@ -45,15 +44,28 @@ ll mypow(ll a,ll b){
     }
     return res;
 }
-
-int32_t main(){
-    int arr[6];
-    rep(i,6)
-        arr[i]=i;
-    int k=0;
-    arr[++k]=10;
-    rep(i,6)
-        cout<<arr[i]<<' ';
-
+const int m=1000;
+int main(){
+    IOS;
+    rep(i,m){
+        rep(ii,m){
+            rep(iii,m){
+                bool key=false;
+                ll r=i,g=ii,b=iii;
+                long long sum = r+g+b;
+		        if(sum + 1 >= 2LL*(max(b,max(r,g)))) {
+                    key=true;
+		        }
+                int a[3];
+                a[0]=i,a[1]=ii,a[2]=iii;
+                sort(a,a+3);
+                if(a[2]<=a[0]+a[1]+1){
+                    if(!key)
+                        cout<<"find"<<endl;
+                }
+            }
+        }
+    }
+    cout<<"END"<<endl;
     return 0;
 }
