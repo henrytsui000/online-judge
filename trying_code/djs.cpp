@@ -27,6 +27,7 @@ void uni(int x,int y){
     sz[x]+=sz[y];
     djs[y]=x;
 }
+
 vector<int> typ;
 
 int main(){

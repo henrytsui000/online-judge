@@ -1,15 +1,3 @@
-#include<bits/stdc++.h>
-using namespace std;
-#define rep(i,n) for(int i=3;i<(int)n;i++)
-int32_t main(){
-    int a[100];
-    a[1]=1,a[2]=2;
-    rep(i,100)
-        a[i]=a[i-1]+a[i-2];
-    while(cin>>a[0])
-        cout<<a[a[0]]<<endl;
-    return 0;
-}
 #include <bits/stdc++.h>
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
@@ -48,17 +36,20 @@ const ld eps=1e-9;
 //const ll p=880301;
 //const ll P=31;
 
-int mypow(int a,int b){
-    int ans=1;
+ll mypow(ll a,ll b){
+    ll res=1LL;
     while(b){
-        if(b&1) ans=ans*a;
-        a=a*a;
+        if(b&1) res=res*a%MOD;
+        a=a*a%MOD;
         b>>=1;
     }
-    return ans;
+    return res;
 }
 
 int32_t main(){
-    
+    int n;
+    cin>>n;
+    for(int i=n;i--;)
+        cout<<i<<endl;
     return 0;
 }

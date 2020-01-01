@@ -46,7 +46,23 @@ ll mypow(ll a,ll b){
     return res;
 }
 
+const int maxn = 1e5+5;
+vector<int> vec;
+
 int32_t main(){
-    
+    int n;
+    cin>>n;
+    vec.resize(n);
+    rep(i,n)
+        cin>>vec[i];
+    vector<int> tmp=vec;
+    tmp.resize(unique(all(tmp))-tmp.begin());
+    rep(x,sz(vec)){
+        vec[x]=lower_bound(all(tmp),vec[x])-tmp.begin();
+    }
+    rep(i,n){
+        cout<<vec[i]<<' ';
+    }
+    cout<<endl;
     return 0;
 }

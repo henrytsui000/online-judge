@@ -46,7 +46,39 @@ ll mypow(ll a,ll b){
     return res;
 }
 
+const int maxn =1e5+5;
+vector<int> edge[maxn];
+int vis[maxn];
+int low[maxn];
+int dep[maxn];
+void dfs(int n,int pa){
+    low[n]=dep[n]=dep[pa]+1;
+    for(int x:edge[n]){
+        if(low[x]){
+            low[n]=min(dep[x],low[n]);
+        }else{
+            dfs(x,n);
+        }
+        low[pa]=min(low[n],low[pa]);
+    }
+    if(low[n]==dep[n]&&n!=0){
+        cout<<"find:"<<pa<<' '<<n<<endl;
+    }
+}
+
 int32_t main(){
-    
+    IOS;
+    int n,m;
+    cin>>n>>m;
+    rep(i,m){
+        int a,b;
+        cin>>a>>b;
+        edge[a].eb(b);
+        edge[b].eb(a);
+    }
+    dfs(0,0);
+    rep(i,n)
+        cout<<low[i]<<' ';
+    cout<<endl;
     return 0;
 }
