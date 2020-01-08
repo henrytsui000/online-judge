@@ -4,7 +4,13 @@ using namespace std;
 #define IOS ios_base::sync_with_stdio(0);cin.tie(0)
 #define endl '\n'
 const int maxn = 1e5;
-
+/*
+用strust node模擬二元樹
+l,r,hav分別紀錄 左，右節點以下的總重量 以及 該節點以下的重量
+init 函式 用遞迴初始化二元樹
+gogo是按照題目把貨物下放
+**因為個節點沒有按照順序 不能先開指標二元樹 所以用陣列模擬**
+*/
 struct node{
     int lc,rc;
     int l,r;

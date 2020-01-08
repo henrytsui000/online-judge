@@ -4,6 +4,12 @@ using namespace std;
 #define IOS ios_base::sync_with_stdio(0);cin.tie(0)
 #define endl '\n'
 #define eb emplace_back
+/*
+利用vector容器紀錄機器人應出的拳
+再跟人比較
+若有輸贏則結束
+否則直到最後
+*/
 int main(){
     int f;cin>>f;
     vector<int> rob;

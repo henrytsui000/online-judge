@@ -6,7 +6,10 @@ using namespace std;
 #define endl '\n'
 const int maxn = 1e5+5;
 int n,m;
-
+/*
+用串練結構模擬砍樹
+並在頭尾多加兩顆高度過高的樹當作邊界
+*/
 struct link{
     int fr,nx;
     int l,r;

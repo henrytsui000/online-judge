@@ -6,7 +6,11 @@ using namespace std;
 const int maxn = 105;
 int a[105][105],b[105][105];
 int s,t,m,n,r;
-
+/*
+暴力搜尋
+check函式是拿來計算區間[i,i+s][j,j+t]
+是否是合理解答 是則回傳距離;否則-1
+*/
 int check(int x,int y){
     int cnt=0,dis=0;
     rep(i,s){
