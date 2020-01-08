@@ -45,8 +45,38 @@ ll mypow(ll a,ll b){
     }
     return res;
 }
+const int maxn = 1005;
+int n;
+int arr[maxn];
+int bit[maxn];
+#define lowbit(x) ((-x)&x)
+void add(int x,int val){
+    for(;x<=n;x+=lowbit(x)){
+        bit[x]+=val;
+    }
+}
+
+int qry(int x){
+    int ans=0;
+    for(;x;x-=lowbit(x))
+        ans+=bit[x];
+    return ans;
+}
 
 int32_t main(){
-    
+    cin>>n;
+    rep(i,n){
+        cin>>arr[i];
+        add(i,arr[i]);
+    }
+    int q;
+    cin>>q;
+    while(q--){
+        int a,b;
+        cin>>a>>b;
+        if(b<a)
+            swap(a,b);
+        cout<<(qry(b)-qry(a-1))<<endl;
+    }
     return 0;
 }
