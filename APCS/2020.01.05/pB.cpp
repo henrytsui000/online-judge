@@ -34,7 +34,7 @@ int main(){
         rep(j,m)
             cin>>b[i][j];
     int ans=1e9+5,cnt=0;
-    rep(i,n-s+1)
+    rep(i,n-s+1){
         rep(j,m-t+1){
             int k=check(i,j);
             if(k!=-1){
@@ -42,6 +42,7 @@ int main(){
                 cnt++;
             }
         }
+    }
     if(cnt==0) cout<<0<<endl<<-1<<endl;
     else cout<<cnt<<endl<<ans<<endl;
     return 0;

@@ -12,7 +12,6 @@ struct node{
     node *rc,*lc;
     int l,r;
     int data;
-
     void pull () {
         data = max(lc->data, rc->data);
     }
@@ -45,7 +44,7 @@ int qry (int l, int r, node *nd) {
     if (l == nd->l && r == nd->r) {
         return nd->data;
     } else {
-        int mid = (nd->l + nd->r);
+        int mid = (nd->l + nd->r)>>1;
         if (l >= mid) {
             return qry(l, r,nd->rc);
         } else if (r <= mid) {
