@@ -9,20 +9,26 @@ using pii = pair<int,int>;
 #define F first
 #define S second
 #define pb emplace_back
+#define mp make_pair
 
 const int maxn = 1e5+5;
 vector<int> edge[maxn];
 int siz[maxn];
 int n,m;
-void dfs(int a,int pa){
-    cout<<a<<' '<<pa<<endl;
+
+pii dfs(int a,int pa){
     siz[a]=1;
+    int ma=0;
+    pii ret(1e9,-1);
     for(int x:edge[a]){
         if(x!=pa){
-            dfs(x,a);
+            ret=min(ret,dfs(x,a));
             siz[a]+=siz[x];
+            ma=max(ma,siz[x]);
         }
     }
+    ma=max(ma,n-siz[a]);
+    return min(ret,mp(ma,a));
 }
 
 int32_t main(){
