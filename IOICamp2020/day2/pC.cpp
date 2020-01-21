@@ -19,8 +19,8 @@ using pdd = pair<ld,ld>;
 #define mp(a,b) make_pair(a,b)
 #define cans cout<<ans<<endl
 #define in cout<<"in lar"<<endl
-#define SORT_UNIQUE(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
-#define GET_POS(c,x) (lower_bound(c.begin(),c.end(),x)-c.begin())
+#define sort_uni(c) (sort(c.begin(),c.end()), c.resize(distance(c.begin(),unique(c.begin(),c.end()))))
+#define get(c,x) (lower_bound(c.begin(),c.end(),x)-c.begin())
 template<typename T1,typename T2>
 ostream& operator<<(ostream& out,pair<T1,T2> P){
     out<<'('<<P.F<<','<<P.S<<')';
@@ -46,33 +46,31 @@ ll mypow(ll a,ll b){
     return res;
 }
 
-const int maxn = 1005;
-vector<int> edge[maxn];
-int low[maxn];
-int dep[maxn];
-int n,m;
-
-void dfs(int a,int pa){
-    dep[a]=dep[pa]+1;
-    low[a]=a;
-    for(int x:edge[a]){
-        if(x!=pa){
-            dfs(x,a);
-            low[a]=min(low[a],dep[x]);
+/******good luck******/
+const int maxn = 1e5+5;
+int cnt[maxn];
+int arr[maxn];
+int32_t main(){
+    IOS;
+    int n,k;
+    cin>>n>>k;
+    int mx=0,ct=0,r=1;
+    rep(i,n+1){
+        if(i==n)
+            arr[i]=1e5+4;
+        else cin>>arr[i];
+        cnt[arr[i]]++;
+        mx=max(cnt[arr[i]],mx);
+        if(i>0)
+        if(arr[i]==arr[i-1])
+            r++;
+        else{
+            ct=max(r,ct);
+            r=0;
         }
     }
-    
-}
-
-int32_t main(){
-    cin>>n>>m;
-    rep(i,m){
-        int l,r;
-        cin>>l>>r;
-        edge[l].pb(r);
-        edge[r].pb(l);
-    }
-    dfs();
-
+    if(k+mx>=n)
+        cout<<n<<endl;
+    else cout<<k+ct<<endl;
     return 0;
 }
