@@ -49,12 +49,9 @@ ll mypow(ll a,ll b){
 int32_t main(){
     int n,d,m,l;
     cin>>n>>d>>m>>l;
-    int fnd=(m%n)-(2*m)%n;
-
-
+    int fnd=((2*m)%n)-(m%n);
+    
     cout<<m%n<<endl;
     cout<<(2*m)%n<<endl;
-
-    
     return 0;
 }

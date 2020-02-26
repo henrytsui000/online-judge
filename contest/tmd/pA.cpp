@@ -50,5 +50,12 @@ ll mypow(ll a,ll b){
 
 int32_t main(){
     IOS;
+    int a,b,g;
+    cin>>a>>b;
+    g=__gcd(a,b);
+    g=a*b/g;
+    double _a=g/a;
+    double _b=g/b;
+    cout<<2*g/(_a+_b)<<endl;
     return 0;
 }

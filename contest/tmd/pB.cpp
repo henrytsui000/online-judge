@@ -47,8 +47,30 @@ ll mypow(ll a,ll b){
 }
 
 /******good luck******/
-
+const int maxn = 1e5+5;
+#define int long long
+ll arr[maxn];
 int32_t main(){
     IOS;
+    int n;
+    cin>>n;
+    int x=n/2-1;
+    rep(i,n)
+        cin>>arr[i];
+    ll c=0,cnt=0;
+    for(int i=x;i>=0;i--){
+        if(arr[i]+c!=arr[n-1-i]){
+            c+=(arr[n-1-i]-(arr[i]+c));
+            cnt++;
+        }//5 1 3
+    }
+    cout<<cnt<<endl;
     return 0;
 }
+/*
+10
+1 3 1 3 1 2 3 1 4 2
+2 4 2 4 2 2 3 1 4 2
+1 3 1 3 2 2 3 1 4 2
+2 4 1 3 2 2 3 1 4 2
+*/
