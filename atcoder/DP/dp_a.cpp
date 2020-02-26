@@ -58,8 +58,7 @@ int32_t main(){
     for(int i=2;i<n;i++){
         dp[i]=min(
             dp[i-2]+abs(arr[i]-arr[i-2]),
-            dp[i-1]+abs(arr[i]-arr[i-1])
-        );
+            dp[i-1]+abs(arr[i]-arr[i-1]));
     }
     cout<<dp[n-1]<<endl;
     return 0;
