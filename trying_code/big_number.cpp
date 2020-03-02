@@ -52,19 +52,31 @@ struct big{
 };
 
 const int maxn = 1e5+5;
+const int maxr=10;
 big num[maxn];
+string str[300];
 
 int32_t main(){
     int n;
     cin>>n;
     rep(i,n){
-        string str;
-        cin>>str;
-        num[i].siz=sz(str);
-        int s=num[i].siz;
-        rep(j,s){
-            num[i].siz+=str[j]-'0';
+        
+        cin>>str[i];
+        int r=maxr-sz(str[i]);
+        string plus="";
+        rep(i,r)
+            plus+='0';
+        str[i]=plus+str[i];
+    }
+    sort(str,str+n);
+    bool key=false;
+    rep(i,n){
+        rep(j,maxr){
+            if(str[i][j]!='0')key=1;
+            if(key) cout<<str[i][j];
         }
+        cout<<endl;
+        key=false;
     }
     return 0;
 }
