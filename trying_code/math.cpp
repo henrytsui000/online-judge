@@ -19,6 +19,7 @@ int mypow(int a,int b){
     }
     return ret;
 }
+
 void build(){
     num[0]=1;
     rep1(i,m){
@@ -31,6 +32,7 @@ void build(){
     }
     cout<<endl;
 }
+
 int32_t main(){
     build();
     cin>>n>>k;

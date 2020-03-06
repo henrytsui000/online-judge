@@ -19,7 +19,7 @@ int st[mlg][maxn];
 
 int rmq(int a,int b){
     int k=__lg(b-a+1);
-    return max(st[k][a],st[k][b-(1<<k)+1]);
+    return min(st[k][a],st[k][b-(1<<k)+1]);
 }
 
 int32_t main(){
@@ -29,15 +29,15 @@ int32_t main(){
         cin>>st[0][i];
     for(int i=1;(1<<i)<=n;i++){
         for(int j=0;j+(1<<i)<=n;j++){
-            st[i][j]=max(st[i-1][j],st[i-1][j+(1<<(i-1))]);
+            st[i][j]=min(st[i-1][j],st[i-1][j+(1<<(i-1))]);
         }
     }
     int q;
-    cin>>q;
-    while(q--){
+    // cin>>q;
+    while(n--){
         int l,r;
         cin>>l>>r;
-        rmq(l,r);
+        cout<<rmq(l-1,r-1)+1<<endl;
     }
     return 0;
 }
