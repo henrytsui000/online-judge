@@ -46,14 +46,26 @@ ll mypow(ll a,ll b){
 	}
 	return res;
 }
-
-int main(){
-	int a;
-	while(cin>>a){
-		if(a==-1)break;
-		a=1<<a;
-		cout<<a<<endl;
+int n;
+int a[2];
+char ch[2]={'(',')'};
+string ans;
+void dfs(){
+	if(a[1]<a[2]) return;
+	if(SZ(ans)==2*n)
+		cout<<ans<<endl;
+	else{
+		rep(i,2){
+	        ans.push_back(ch[i]);		
+			a[i]++;
+			dfs();
+			ans.pop_back();
+			a[i]--;
+		}
 	}
+}
+int main(){
+	while(cin>>n) dfs();
 	return 0;
 }
 

@@ -25,4 +25,4 @@ int main(){
 	for(int i=73096;i>=0;i--)
 		cout<<num[i];
 	return 0;
-} 
+}

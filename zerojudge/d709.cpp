@@ -1,23 +1,29 @@
 #include<bits/stdc++.h>
+#define MAXN 1000000
+#define endl '\n'
 using namespace std;
-#define MAXN 10e6
-bool sieve[1000000];
-void linear_prime();
+void liner_s();
 vector<int> prime;
+bool sieve[MAXN];
 int main(){
-	linear_prime();
 	int a;
+	ios_base::sync_with_stdio(0);
+	cin.tie(0);
+	liner_s();
+	sieve[1]=1;
 	while(cin>>a){
-		cout<<sieve[a]<<endl;
+		if(!a)break;
+		if((a>3)&&((a%2==0)||(a%3==0)))cout<<'1'<<endl;
+		else cout<<sieve[a]<<endl;
 	}
 	return 0;
 }
-void linear_prime(){
-	for(int i=2;i<100000;i++){
+void liner_s(){
+	for(int i=2;i<MAXN;i++){
 		if(!sieve[i])
 			prime.push_back(i);
 		for(int j=0;prime[j]*i<MAXN;j++){
-			sieve[i*prime[j]]=true;
+			sieve[prime[j]*i]=1;
 			if(i%prime[j]==0)
 				break;
 		}

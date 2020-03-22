@@ -1,41 +1,38 @@
 #include<bits/stdc++.h>
 using namespace std;
-int arr[6];
-int pow(int a,int b){
-    int ans = 1,base = a;
-    while(b!=0){
-        if(b&1)
-            ans *= base;
-        base *= base;
-        b>>=1;
-    }
-    return ans;
-}
-int sum(int k){
-	int cnt=0;
-	for(int i=5;i>=0;i--)
-		cnt+=pow(k,i)*arr[i];
-	return cnt;
-}
 int main(){
-	for(int i=0;i<6;i++){
+#define int long long
+	int arr[6],a;
+	int cnk=0;
+	bool key=true;
+	for(int i=5;i>=0;i--){
 		cin>>arr[i];
+		if(arr[i]!=0)key=false;
 	}
-	int N=0;
-	
-	for(int i=-40;i<=40;i++){
-		if(sum(i)==0){
-			cout<<i<<' '<<i<<endl;
-			N=0;
-		}else if(sum(i)<0){
-			if(N==1)cout<<i<<' '<<i+1;
-			N=-1;
-		}else{
-			if(N==-1)cout<<i<<' '<<i<<endl;
-			N=1;
+	if(key){
+		cout<<"Too many... = =\"";
+	}else {
+		cnk=0;
+		int cnt=0,pow=1;
+		for(int j=-38;j<=36;j++){
+			for(int i=0;i<6;i++){
+				cnt+=pow*arr[i];
+				pow*=j;
+			}
+			pow=1;
+			if(j!=-39&&j!=-38)
+				if(a*cnt<0){
+					cout<<j-1<<' '<<j<<endl;
+					cnk++;
+				}
+			else if(cnt==0&&j!=-39){
+				cout<<j<<' '<<j<<endl;
+				cnk++;
+			}
+			a=cnt;
+			cnt=0;
 		}
+		if(cnk==0)cout<<"N0THING! >\\\\\\<"<<endl;
 	}
-	
-	
 	return 0;
 }
