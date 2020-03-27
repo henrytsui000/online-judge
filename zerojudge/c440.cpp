@@ -8,14 +8,24 @@ using ll = long long;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define eb emplace_back
 const int maxn = 1e5+5;
-
+#define int long long
 int32_t main(){
-    int n;
-    cin>>n;
-    int cnt=0,k=1;
-    while(k<n){
-        k*=10,cnt++;
+    IOS;
+    string str;
+    cin>>str;
+    int sum=0;
+    rep(i,sz(str)){
+        if(str[i]=='Q')
+            sum++;
     }
-    cout<<cnt<<endl;
+    int cnt=0,ans=0;
+    rep(i,sz(str)){
+        if(str[i]=='Q'){
+            cnt++;
+        }else if(str[i]=='A'){
+            ans+=cnt*(sum-cnt);
+        }
+    }
+    cout<<ans<<endl;
     return 0;
 }

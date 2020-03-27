@@ -10,12 +10,18 @@ using ll = long long;
 const int maxn = 1e5+5;
 
 int32_t main(){
-    int n;
-    cin>>n;
-    int cnt=0,k=1;
-    while(k<n){
-        k*=10,cnt++;
+    string str,s;
+    getline(cin,str);
+    // cin.ignore();
+    getline(cin,s);
+    string ss="";
+    rep(i,sz(str)){
+        ss+=str[i];
+        if(str[i]==' '){
+            cout<<s<<", "<<ss<<endl;
+            ss="";
+        }
     }
-    cout<<cnt<<endl;
+    cout<<s<<", "<<ss<<endl;
     return 0;
 }

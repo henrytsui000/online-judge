@@ -8,14 +8,31 @@ using ll = long long;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define eb emplace_back
 const int maxn = 1e5+5;
+int arr[maxn];
+vector<int> vec;
+
+bool cmp(int a,int b){
+    return a>b;
+}
 
 int32_t main(){
+    IOS;
     int n;
     cin>>n;
-    int cnt=0,k=1;
-    while(k<n){
-        k*=10,cnt++;
+    rep(i,n){
+        int a;
+        cin>>a;
+        vec.eb(a);
     }
-    cout<<cnt<<endl;
+    sort(all(vec));
+    for(int x:vec)
+        cout<<x<<' ';
+    cout<<endl;
+    vec.resize(unique(all(vec))-vec.begin());
+    sort(all(vec),cmp);
+    for(int x:vec)
+        cout<<x<<' ';
+    cout<<endl;
+
     return 0;
 }
