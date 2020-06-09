@@ -8,13 +8,11 @@ using ll = long long;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define eb emplace_back
 const int maxn = 1e5+5;
-vector<int> vec;
-int a;
-using pii = pair<int,int>;
 
 int32_t main(){
-    vector<pii> vec;
-    vec.eb(make_pair(1,2));
-    cout<<vec.size()<<endl;
+    string str;
+    getline(cin,str);
+    cout<<str<<' '<<str;
+    
     return 0;
 }
