@@ -47,7 +47,7 @@ ll mypow(ll a,ll b){
 }
 
 int init(){
-    int ans,arr[5];
+    int ans,arr[6];
     while(true){
         ans=rand()%10000;
         arr[5]=ans;

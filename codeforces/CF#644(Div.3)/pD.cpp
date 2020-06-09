@@ -31,6 +31,7 @@ ostream& operator<<(ostream& out,pair<T1,T2> P){
 const ll INF64=8000000000000000000LL;
 const int INF=0x3f3f3f3f;
 const ll MOD=ll(1e9+7);
+const ll mm = 1e6;
 const ld PI=acos(-1);
 const ld eps=1e-9;
 //const ll p=880301;
@@ -81,7 +82,7 @@ void fnd(int deep,int num,int high){
     }
 }
 
-int ans=0;
+int ans=0,r;
 void gogo(int a,int b){
     int k=a,itr=0;
     vec.clear();
@@ -96,7 +97,10 @@ void gogo(int a,int b){
         vec.eb(mp(k,1));
 
     fnd(0,1,b);
-    ans=max(cut,ans);
+    if(cut>ans){
+        r=a;
+        ans=cut;
+    }
     cut=0;
     // cout<<a/ma<<endl;
     ma=1;
@@ -112,9 +116,12 @@ int32_t main(){
     //     cin>>a>>b;
     //     gogo(a,b);
     // }
-    rep1(i,1e9){
+    rep1(i,1e8){
         gogo(i,i);
+        if(i%mm==0)
+            cout<<"check"<<i/mm<<endl;
     }
+    cout<<r<<endl;
     cout<<ans<<endl;
     return 0;
 }
