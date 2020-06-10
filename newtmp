@@ -1,0 +1,4 @@
+#!/bin/bash
+read name
+cp tmp.cpp ${name}.cpp
+vim ${name}.cpp

@@ -109,18 +109,17 @@ void gogo(int a,int b){
 int32_t main(){
     IOS;
     linear_sieve();
-    
+    cout<<sz(prime)<<endl;
     // int t; cin>>t;
     // while(t--){
     //     int a,b;
     //     cin>>a>>b;
     //     gogo(a,b);
     // }
-    rep1(i,1e8){
+    rep1(i,1){
         gogo(i,i);
         if(i%mm==0)
             cout<<"check"<<i/mm<<endl;
-    }
     cout<<r<<endl;
     cout<<ans<<endl;
     return 0;
