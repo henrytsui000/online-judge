@@ -90,10 +90,34 @@ ll mypow(ll a,ll b){
 }
 
 /******good luck******/
-
+const int maxn = 1e5 +5 ;
+const int maxk = 17;
+int cnt[maxk];
 int32_t main () {
     TIME(main);
     IOS();
-    
+    int n,k;
+    cin>>n>>k;
+    rep(i,n){
+        int tmp=0,r=0;
+        rep(j,k){
+            cin>>r;
+            tmp+=(r<<j);
+        }
+        cnt[tmp]++;
+    }
+    bool key = false;
+    if(cnt[0])
+        key=true;
+    else{
+        rep(i,maxk)
+            rep(j,maxk){
+                if(cnt[i]>0&&cnt[j]>0&&(i&j)==0)
+                    key=true;
+            }
+    }
+    if(key)
+        cout<<"YES"<<endl;
+    else cout<<"NO"<<endl;
     return 0;
 }
