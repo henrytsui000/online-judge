@@ -179,10 +179,10 @@ void start(){
     string str;
     cout<<">>>";
     while(cin>>str){
-        if(str=="flag"){
+        if(str=="flag"||str=="f"){
             cin>>x>>y;
             arr[p(x)][p(y)]='F';
-        }else if(str=="step"){
+        }else if(str=="step"||str=="s"){
             cin>>x>>y;
             while(!t_move&&ans[p(x)][p(y)]=='X'){
                 give_map();
@@ -193,33 +193,33 @@ void start(){
             else if(arr[p(x)][p(y)]<'9'&&arr[p(x)][p(y)]>='0'&&count_flag(p(x),p(y))){
                 extra_step(p(x),p(y));
             }else step(p(x),p(y));
-        }else if(str=="unknow"){
+        }else if(str=="unknow"||str=="?"){
             cin>>x>>y;
             arr[p(x)][p(y)]='?';
-        }else if(str=="unflag"){
+        }else if(str=="unflag"||str=="uf"){
             cin>>x>>y;
             arr[p(x)][p(y)]='$';
-        }else if(str=="show"){
+        }else if(str=="show"||str=="d"){
             rep(i,maxn){
                 rep(j,maxn)
                     if(arr[i][j]=='0') cout<<"  ";
                     else cout<<arr[i][j]<<' ';
                 cout<<endl;
             }
-        }else if(str=="detail"){
+        }else if(str=="detail"||str=="t"){
             cout<<"time: "<<(time(NULL)-t_start)/60<<"min "
                 <<(time(NULL)-t_start)%60<<"sec"<<endl;
             show_detail();
-        }else if(str=="help"){
+        }else if(str=="help"||str=="h"){
             help();
-        }else if(str=="ans"){
+        }else if(str=="ans"||str=="a"){
             rep(i,maxn){
                 rep(j,maxn)
                     if(ans[i][j]=='0') cout<<"  ";
                     else  cout<<ans[i][j]<<' ';
                 cout<<endl;
             }
-        }else if(str=="muti-step"){
+        }else if(str=="muti-step"||str=="ms"){
             while(cin>>x>>y){
                 if(x=='-'&&y=='-')
                     break;
@@ -230,7 +230,7 @@ void start(){
                     extra_step(p(x),p(y));
                 }else step(p(x),p(y));
             }
-        }else if(str=="muti-flag"){
+        }else if(str=="muti-flag"||str=="mf"){
             while(cin>>x>>y){
                 if(x=='-'&&y=='-')
                     break;
