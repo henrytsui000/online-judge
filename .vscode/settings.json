@@ -17,6 +17,7 @@
         "valarray": "cpp",
         "bitset": "cpp",
         "utility": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "*.tcc": "cpp"
     }
 }
