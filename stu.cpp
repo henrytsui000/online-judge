@@ -36,8 +36,8 @@ pii operator-(pii a,pii b){
 
 int operator*(pii a,pii b){
     if(a.F*b.S-a.S*b.F)
-        return -1
-
+        return -1;
+    else return 1;
 }
 
 //}}}

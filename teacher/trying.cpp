@@ -1,24 +1,15 @@
-#include<bits/stdc++.h>
-#include<fstream>
+#include <bits/stdc++.h>
 using namespace std;
-
-
+using ll = long long;
+#define IOS ios_base::sync_with_stdio(0); cin.tie(0)
+#define endl '\n'
+#define all(a) a.begin(),a.end()
+#define sz(a) ((int)a.size())
 #define rep(i,n) for(int i=0;i<(int)n;i++)
-using psi = pair<int,string>;
-#define F first
-#define S second
+#define eb emplace_back
+const int maxn = 1e5+5;
 
-
-int main(){
-    ifstream fin("test.txt");
-    string str;fin>>str;
-    int n;fin>>n;
-    psi p[n];
-    rep(i,n)
-        fin>>p[i].S>>p[i].F;
-    sort(p,p+n);
-    ofstream fout("test.txt");
-    fout<<str<<endl;
-    rep(i,n)
-        fout<<p[i].S<<' '<<p[i].F<<endl;
+int32_t main(){
+    
+    return 0;
 }
