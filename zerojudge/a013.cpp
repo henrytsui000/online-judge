@@ -60,8 +60,7 @@ int32_t main(){
     string a,b;
     init();
     while(cin>>a){
-        if(a=="#")
-            break;
+        if(a=="#") break;
         cin>>b;
         cout<<(tn(a)-tn(b)==0?"ZERO":nt(abs(tn(a)-tn(b))))<<endl;
     }
