@@ -27,18 +27,8 @@ ostream& operator<<(ostream& out,pair<T1,T2> P){
     return out;
 }
 
-pii operator-(pii a,pii b){
-    pii ret;
-    ret.F=a.F-b.F;
-    ret.S=a.S-b.S;
-    return ret;
-}
-
-int operator*(pii a,pii b){
-    cout<<a.F*b.S-a.S*b.F<<endl;
-    if(a.F*b.S-a.S*b.F<=0) return 1;
-    else return 0;
-}
+pii operator-(pii a,pii b){ return mp(a.F-b.F,a.S-b.S);}
+int operator*(pii a,pii b){ return a.F*b.S-a.S*b.F;}
 
 //}}}
 const ll INF64=8000000000000000000LL;
@@ -72,58 +62,34 @@ int cal(pii a,pii b,pii c){
     return p_1*p_2;
 }
 
-// int main(){
-//     pii cll[3];
-//     while(true){
-//         rep(i,3)
-//             cin>>p[i].F>>p[i].S;
-//         cout<<cal(p[0],p[1],p[2])<<endl;
-//     }
-//     return 0;
-// }
-
 int32_t main(){
-    ofstream fin("test.txt");
-    int n;
-    fin>>n;
-    rep(i,n)
-        cin>>p[i].F>>p[i].S;
+    ifstream fin("test.txt");
+    int n; fin>>n;
+    rep(i,n) fin>>p[i].F>>p[i].S;
     sort(p,p+n);
     up.eb(p[0]),up.eb(p[1]);
-    int sup=2;
-    rep(i,n)
-        cout<<p[i]<<',';
-    cout<<endl<<"CUT"<<endl;
     for(int i=2;i<n;i++){
 
 
-        cout<<"BEF:";
-        for(auto x: up) cout<<x<<',';
+        // cout<<"BEF:";
+        // for(auto x: up) cout<<x<<',';
         cout<<endl<<"CONS:";
-        cout<<up[sup-2]<<up[sup-1]<<p[i]<<endl;
-        cout<<cal(up[sup-2],up[sup-1],p[i])<<endl;
-
-
-        if(cal(up[sup-2],up[sup-1],p[i]))
-            up.pop_back(),sup--;
+        cout<<up[sz(up)-2]<<up[sz(up)-1]<<p[i]<<"->";
+        cout<<cal(up[sz(up)-2],up[sz(up)-1],p[i])<<endl;
+        while(sz(up)>=2&&cal(up[sz(up)-2],up[sz(up)-1],p[i])>=0){
+            up.pop_back();
+        }
         up.eb(p[i]);
-        sup++;
+
         for(auto x: up)
             cout<<x<<',';
-        cout<<sup<<endl;
-        
+        cout<<endl;
     }
     cout<<"ANS:";
     for(auto x: up)
         cout<<x<<',';
     cout<<endl;
 
-    pii cll[3];
-    while(true){
-        rep(i,3)
-            cin>>cll[i].F>>cll[i].S;
-        cout<<cal(cll[0],cll[1],cll[2])<<endl;
-    }
     return 0;
 }
 /*
