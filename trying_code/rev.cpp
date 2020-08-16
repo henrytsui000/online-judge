@@ -10,11 +10,10 @@ using ll = long long;
 const int maxn = 1e5+5;
 
 int32_t main(){
-    bool rev=0;
-    rep(i,10){
-        rev=!rev;
-        cout<<rev<<' ';    
-    }
-    cout<<endl;
+    int a,b;
+    cin>>a>>b;
+    if(a==5&b==6)
+        cout<<"ASDF"<<endl;
+    else cout<<"NO"<<endl;
     return 0;
 }

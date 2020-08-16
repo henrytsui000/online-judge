@@ -30,14 +30,14 @@ ostream& operator<<(ostream& out,pair<T1,T2> P){
 pii operator-(pii a,pii b){
     pii ret;
     ret.F=a.F-b.F;
-    ret.S=a.S-b.F;
+    ret.S=a.S-b.S;
     return ret;
 }
 
 int operator*(pii a,pii b){
-    if(a.F*b.S-a.S*b.F)
-        return -1;
-    else return 1;
+    cout<<a.F*b.S-a.S*b.F<<endl;
+    if(a.F*b.S-a.S*b.F<=0) return 1;
+    else return 0;
 }
 
 //}}}
@@ -60,24 +60,89 @@ ll mypow(ll a,ll b){
 }
 
 const int maxn = 1e5+5;
-pii con[maxn];
+pii p[maxn];
 
-vector<int> up;
-vector<int> dw;
+vector<pii> up;
+vector<pii> dw;
 
 int cal(pii a,pii b,pii c){
     pii p_1=b-a,p_2=c-a;
-    cout<<p_1<<endl;
-    cout<<p_2<<endl;
-    if(p_1*p_2>0) return 1;
-    else return 0;
+    // cout<<p_1<<endl<<p_2<<endl;
+    // cout<<p_1*p_2<<endl;
+    return p_1*p_2;
 }
+
+// int main(){
+//     pii cll[3];
+//     while(true){
+//         rep(i,3)
+//             cin>>p[i].F>>p[i].S;
+//         cout<<cal(p[0],p[1],p[2])<<endl;
+//     }
+//     return 0;
+// }
 
 int32_t main(){
+    ofstream fin("test.txt");
     int n;
+    fin>>n;
     rep(i,n)
-        cin>>con[i].F>>con[i].S;
-    sort(con,con+n);
+        cin>>p[i].F>>p[i].S;
+    sort(p,p+n);
+    up.eb(p[0]),up.eb(p[1]);
+    int sup=2;
+    rep(i,n)
+        cout<<p[i]<<',';
+    cout<<endl<<"CUT"<<endl;
+    for(int i=2;i<n;i++){
 
+
+        cout<<"BEF:";
+        for(auto x: up) cout<<x<<',';
+        cout<<endl<<"CONS:";
+        cout<<up[sup-2]<<up[sup-1]<<p[i]<<endl;
+        cout<<cal(up[sup-2],up[sup-1],p[i])<<endl;
+
+
+        if(cal(up[sup-2],up[sup-1],p[i]))
+            up.pop_back(),sup--;
+        up.eb(p[i]);
+        sup++;
+        for(auto x: up)
+            cout<<x<<',';
+        cout<<sup<<endl;
+        
+    }
+    cout<<"ANS:";
+    for(auto x: up)
+        cout<<x<<',';
+    cout<<endl;
+
+    pii cll[3];
+    while(true){
+        rep(i,3)
+            cin>>cll[i].F>>cll[i].S;
+        cout<<cal(cll[0],cll[1],cll[2])<<endl;
+    }
     return 0;
 }
+/*
+14
+1 1
+2 1
+2 2
+2 3
+0 1
+
+5 5
+4 3
+3 2
+6 1
+4 4
+
+4 1
+5 3
+1 0
+4 0
+
+*/
