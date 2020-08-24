@@ -57,8 +57,6 @@ vector<pii> dw;
 
 int cal(pii a,pii b,pii c){
     pii p_1=b-a,p_2=c-a;
-    // cout<<p_1<<endl<<p_2<<endl;
-    // cout<<p_1*p_2<<endl;
     return p_1*p_2;
 }
 
@@ -67,27 +65,22 @@ int32_t main(){
     int n; fin>>n;
     rep(i,n) fin>>p[i].F>>p[i].S;
     sort(p,p+n);
-    up.eb(p[0]),up.eb(p[1]);
+    up.eb(p[0]),up.eb(p[1]),dw.eb(p[0]),dw.eb(p[1]);
     for(int i=2;i<n;i++){
-
-
-        // cout<<"BEF:";
-        // for(auto x: up) cout<<x<<',';
-        cout<<endl<<"CONS:";
-        cout<<up[sz(up)-2]<<up[sz(up)-1]<<p[i]<<"->";
-        cout<<cal(up[sz(up)-2],up[sz(up)-1],p[i])<<endl;
-        while(sz(up)>=2&&cal(up[sz(up)-2],up[sz(up)-1],p[i])>=0){
+        while(sz(up)>=2&&cal(up[sz(up)-2],up[sz(up)-1],p[i])>=0)
             up.pop_back();
-        }
         up.eb(p[i]);
-
-        for(auto x: up)
-            cout<<x<<',';
-        cout<<endl;
     }
+    for(int i=2;i<n;i++){
+        while(sz(dw)>=2&&cal(dw[sz(dw)-2],dw[sz(dw)-1],p[i])<=0)
+            dw.pop_back();
+        dw.eb(p[i]);
+    }
+    for(int i=sz(dw)-2;i>0;i--)
+        up.eb(dw[i]);
     cout<<"ANS:";
     for(auto x: up)
-        cout<<x<<',';
+        cout<<x<<", "[x==*(up.end()-1)];
     cout<<endl;
 
     return 0;
