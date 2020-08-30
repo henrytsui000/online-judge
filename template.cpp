@@ -8,6 +8,7 @@ using pll = pair<ll,ll>;
 using pdd = pair<ld,ld>;
 #define IOS ios_base::sync_with_stdio(0); cin.tie(0)
 #define endl '\n'
+#define mem(a,b) memset(a, (b),sizeof(a))
 #define all(a) a.begin(),a.end()
 #define sz(a) ((int)a.size())
 #define F first

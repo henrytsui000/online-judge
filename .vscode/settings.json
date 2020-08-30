@@ -18,6 +18,7 @@
         "bitset": "cpp",
         "utility": "cpp",
         "functional": "cpp",
-        "*.tcc": "cpp"
+        "*.tcc": "cpp",
+        "type_traits": "cpp"
     }
 }

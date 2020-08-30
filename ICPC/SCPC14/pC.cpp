@@ -10,6 +10,7 @@ using pdd = pair<ld, ld>;
     ios_base::sync_with_stdio(0); \
     cin.tie(0)
 #define endl '\n'
+#define mem(a, b) memset(a, (b), sizeof(a))
 #define all(a) a.begin(), a.end()
 #define sz(a) ((int)a.size())
 #define F first
@@ -52,16 +53,29 @@ ll mypow(ll a, ll b) {
 
 /******good luck******/
 #define int ll
+
+const int maxn = 1e4 + 5;
+int cnt[maxn];
+
+bool cmp(pii a, pii b) { return a.F > b.F; }
+
 void solve() {
-    int n;
-    cin >> n;
-    int a, b;
-    cin >> a;
-    int ans = 0;
-    rep1(i, n) {
-        swap(a, b);
+    int m, n, c;
+    cin >> m >> n >> c;
+    mem(cnt, 0);
+    rep(i, m) {
+        int a;
         cin >> a;
-        if (a < b) ans += (b - a);
+        cnt[a]++;
+    }
+    vector<pii> cal;
+    rep(i, n + 1) { cal.pb(mp(cnt[i], (i * i) % c)); }
+    sort(all(cal), cmp);
+    for(pii x: cal)cout<<x<<endl;
+    int ans = 0, s = 0;
+    for (pii x : cal) {
+        s += x.S;
+        ans = max(ans, s * x.F);
     }
     cout << ans << endl;
 }
@@ -70,8 +84,16 @@ int32_t main() {
     IOS;
     int t;
     cin >> t;
-    while (t--) {
+    rep(i, t) {
+        cout << "Case " << i + 1 << ": ";
         solve();
     }
     return 0;
 }
+/*
+2
+10 3 9
+1 1 2 2 1 1 2 3 1 2
+10 3 9
+1 1 2 2 1 1 2 3 1 2
+*/
