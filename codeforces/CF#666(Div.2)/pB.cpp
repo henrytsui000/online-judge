@@ -2,6 +2,7 @@
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
 using ll = long long;
+#define int ll
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -52,37 +53,50 @@ ll mypow(ll a, ll b) {
 }
 
 /******good luck******/
-
+#define int ll
 const int maxn = 1e5 + 5;
 int arr[maxn];
-#define int ll
-void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
+
+int cal(int r, int n) {
+    int cnt = 0, cntt = 0;
+    rep(i, n) {
+        if (log(r) / log(10) * (n - 1) >= 18) return INF64;
+        cnt += abs(arr[i] - pow(r, i));
+        cntt += arr[i] - 1;
     }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
+    cout << cntt << endl;
+    return cntt;
+}
+
+void solve() {
+    mem(arr, 0);
+    int n, ans = 1e18;
+    cin >> n;
+    rep(i, n) cin >> arr[i];
+    sort(arr, arr + n);
+    int mx = pow(1e17, 1.0 / n);
+    for (int i = 1; i <= mx; i++) {
+        int cnt = 0;
+        rep(j, n) { cnt += abs(arr[j] - pow(i, j)); }
+        ans = min(ans, cnt);
     }
     cout << ans << endl;
 }
 
 int32_t main() {
     IOS;
-    int t;
-    cin >> t;
-    rep(i, t) {
-        cout << "Case " << i + 1 << ": ";
-        solve();
-    }
+    // tryi/ng();
+    // cout<<log(1000)/log(10)<<endl;
+    solve();
     return 0;
 }
+/*
+100
+2822 374 4 5146 3893720 19 162293587 767 128 2906 473697099 790471844 12 123
+209702 9514 2 15142567 12 16286175 10 7626 103831758 8 1130 2 1 3 134831
+20174393 24 240511765 368093800 35986499 679271 181 157 161014 334283297 10556 3
+55 12 7055812 22 9 2 82649122 42830504 6743558 317842 1 69382656 51127531 2
+23391036 583 158075560 898311564 507376642 373734413 32413364 159 72 45101931
+2081433 4 1433 90153843 2691952 385 24976 2 2339 22767706 4499374 1184 3616105
+316304701 488527701 263000 394 2309 16026 ...
+*/

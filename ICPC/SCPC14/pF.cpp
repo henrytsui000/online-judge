@@ -16,7 +16,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -52,28 +52,23 @@ ll mypow(ll a, ll b) {
 }
 
 /******good luck******/
-
-const int maxn = 1e5 + 5;
-int arr[maxn];
 #define int ll
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
+    int a, b;
+    cin >> a >> b;
+    int l = 0, r = 1e9+5, mid;
+    while (r != l + 1) {
+        mid = (l + r) >> 1;
+        if (mid * (mid + 1) / 2 > b)
+            r = mid;
+        else if (mid * (mid + 1) / 2 < b)
+            l = mid;
+        else {
+            cout << mid - 1 << " " << mid - 1 << endl;
+            return;
+        }
     }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
-    }
-    cout << ans << endl;
+    cout << l << ' ' << b - 1 - (l * (l + 1) / 2) << endl;
 }
 
 int32_t main() {

@@ -2,6 +2,7 @@
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
 using ll = long long;
+#define int ll
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -52,28 +53,18 @@ ll mypow(ll a, ll b) {
 }
 
 /******good luck******/
+const int maxn = 1005;
+int dp[maxn][maxn];
 
-const int maxn = 1e5 + 5;
-int arr[maxn];
-#define int ll
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
-    }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
-    }
-    cout << ans << endl;
+    mem(dp,0);
+    int n, m;
+    cin >> n >> m;
+    rep(i, n) rep(j, m) cin >> dp[i][j];
+    rep1(i, n) dp[i][0] += dp[i - 1][0];
+    rep1(i, m) dp[0][i] += dp[0][i - 1];
+    rep1(i, n) rep1(j, m) dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]) + dp[i][j];
+    cout << dp[n - 1][m - 1] << endl;
 }
 
 int32_t main() {

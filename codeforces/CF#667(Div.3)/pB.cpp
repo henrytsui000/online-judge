@@ -1,7 +1,8 @@
-#include <bits/stdc++.h>
+    #include <bits/stdc++.h>
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
 using ll = long long;
+#define int ll
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -53,27 +54,25 @@ ll mypow(ll a, ll b) {
 
 /******good luck******/
 
-const int maxn = 1e5 + 5;
-int arr[maxn];
 #define int ll
+
+int cal(int a,int b,int x,int y, int n){
+    int k = min(n,a-x);
+    a = a - k;
+    n -= k;
+    // cout<<n<< ' ';
+    b = b - min(n,b-y);
+    // cout<<a<<' '<<b<<endl;
+    // cout<<a*b<<endl;
+    return a*b;
+}
+
+
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
-    }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
-    }
-    cout << ans << endl;
+    int a,b,x,y,n;
+    cin>>a>>b>>x>>y>>n;
+    cout<<min(cal(a,b,x,y,n),cal(b,a,y,x,n))<<endl;
+
 }
 
 int32_t main() {
@@ -81,7 +80,7 @@ int32_t main() {
     int t;
     cin >> t;
     rep(i, t) {
-        cout << "Case " << i + 1 << ": ";
+        // cout << "Case " << i + 1 << ": ";
         solve();
     }
     return 0;

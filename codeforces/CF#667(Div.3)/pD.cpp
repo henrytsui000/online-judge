@@ -2,6 +2,7 @@
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
 using ll = long long;
+#define int ll
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -52,28 +53,46 @@ ll mypow(ll a, ll b) {
 }
 
 /******good luck******/
-
-const int maxn = 1e5 + 5;
+const int maxn = 20;
 int arr[maxn];
+int dp[maxn];
 #define int ll
+
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
     mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
+    mem(dp,0);
+    string str;
+    int a;
+    cin>>str>>a;
+    for(int i = sz(str);i<20;i++)
+        str='0'+str;
+    int sum=0;
+    rep(i,20)
+        sum+=(str[i]-'0');
+    // cout<<sum<<endl;
+    int ans = 0;
+    int kk=1;
+    for(int i=19;i>=0;i--,kk*=10){
+        // cout<<str<<endl;
+        if(sum<=a){
+            cout<<ans<<endl;
+            return;
+        }
+        if(str[i]=='0')
+            continue;
+        int tmp = i;
+        sum -=(str[i]-'0');
+        ans +=((('9'-str[i])+1)*kk);
+        // cout<<"Ans:"<<ans<<endl;
+        str[i]='0';
+        while(str[tmp-1]=='9'){
+            tmp--;
+            sum-=9;
+            str[tmp]='0';
+        }
+        str[tmp-1]=(str[tmp-1]+1);
+        sum++;
     }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
-    }
-    cout << ans << endl;
 }
 
 int32_t main() {
@@ -81,7 +100,7 @@ int32_t main() {
     int t;
     cin >> t;
     rep(i, t) {
-        cout << "Case " << i + 1 << ": ";
+        // cout << "Case " << i + 1 << ": ";
         solve();
     }
     return 0;

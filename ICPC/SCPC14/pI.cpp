@@ -3,6 +3,7 @@
 using namespace std;
 using ll = long long;
 using ld = long double;
+#define int ll
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
 using pdd = pair<ld, ld>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -53,27 +54,29 @@ ll mypow(ll a, ll b) {
 
 /******good luck******/
 
-const int maxn = 1e5 + 5;
-int arr[maxn];
-#define int ll
+bool cmp(pii a, pii b) {
+    if (a.S != b.S)
+        return a.S > b.S;
+    else
+        return a.F > b.F;
+}
+
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
+    string str;
+    pii arr[31];
+    rep(i, 26) arr[i].S = 0;
+    rep(i, 26) arr[i].F = i;
+    while (cin >> str) {
+        if (str[0] == '*') break;
+
+        rep(i, sz(str)) { arr[str[i] - (str[i] >= 'a' ? 'a' : 'A')].S++; }
     }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
+    sort(arr, arr + 26, cmp);
+    int ans = 0;
+    rep(i, 5) {
+        if (arr[i].S) ans += arr[i].F;
     }
-    cout << ans << endl;
+    cout << (ans > 62 ? "E" : "Ine") << "ffective" << endl;
 }
 
 int32_t main() {

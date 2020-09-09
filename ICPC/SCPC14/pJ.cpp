@@ -3,6 +3,7 @@
 using namespace std;
 using ll = long long;
 using ld = long double;
+#define int ll
 using pii = pair<int,int>;
 using pll = pair<ll,ll>;
 using pdd = pair<ld,ld>;
@@ -49,7 +50,19 @@ ll mypow(ll a,ll b){
 
 /******good luck******/
 
+void solve(){
+    int a,b,c,d;
+    cin>>a>>b>>c>>d;
+    cout<<c*60+d-60*a-b<<endl;
+}
+
 int32_t main(){
     IOS;
+    int t;
+    cin>>t;
+    rep(i,t){
+        cout<<"Case "<<i+1<<": ";
+        solve();
+    }
     return 0;
 }

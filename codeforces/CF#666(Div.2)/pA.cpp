@@ -2,6 +2,7 @@
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
 using ll = long long;
+#define int ll
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -52,28 +53,21 @@ ll mypow(ll a, ll b) {
 }
 
 /******good luck******/
+const int maxn = 1005;
+int dp[maxn][maxn];
 
-const int maxn = 1e5 + 5;
-int arr[maxn];
-#define int ll
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
+    int n;
+    cin >> n;
+    string str;
+    int arr[26] = {0};
+    rep(i, n) {
+        cin >> str;
+        rep(j, sz(str)) { arr[str[j] - 'a']++; }
     }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
-    }
-    cout << ans << endl;
+    bool key = true;
+    rep(i, 26) if (arr[i] % n) key = 0;
+    cout << (key ? "YES" : "NO") << endl;
 }
 
 int32_t main() {
@@ -81,7 +75,7 @@ int32_t main() {
     int t;
     cin >> t;
     rep(i, t) {
-        cout << "Case " << i + 1 << ": ";
+        // cout << "Case " << i + 1 << ": ";
         solve();
     }
     return 0;

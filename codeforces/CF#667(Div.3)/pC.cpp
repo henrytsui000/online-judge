@@ -2,6 +2,7 @@
 #pragma GCC optimize("unroll-loops,no-stack-protector")
 using namespace std;
 using ll = long long;
+#define int ll
 using ld = long double;
 using pii = pair<int, int>;
 using pll = pair<ll, ll>;
@@ -16,7 +17,7 @@ using pdd = pair<ld, ld>;
 #define F first
 #define S second
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define rep1(i, n) for (int i = 1; i <= (int)n; i++)
+#define rep1(i, n) for (int i = 1; i < (int)n; i++)
 #define pb push_back
 #define eb emplace_back
 #define mp(a, b) make_pair(a, b)
@@ -53,35 +54,61 @@ ll mypow(ll a, ll b) {
 
 /******good luck******/
 
-const int maxn = 1e5 + 5;
-int arr[maxn];
-#define int ll
+
 void solve() {
-    int m, n, c;
-    cin >> m >> n >> c;
-    mem(arr,0);
-    vector<pii> cnt;
-    rep(i, m) {
-        int a;
-        cin >> a;
-        arr[a]++;
+    int n,x,y;
+    vector<int>  ans;
+    cin>>n>>x>>y;
+    for(int i = 1;i<=55;i++){
+        if((y-x)%i==0){
+            int d = (y-x)/i;
+            if(x+i*(n-1)<y)
+                continue;
+            // cout<<"ADSFasdf:"<<i<<endl;
+            n-=2;
+            ans.eb(x),ans.eb(y);
+
+            int tmpx= x;
+            while(tmpx+i!=y&&n){
+                tmpx+=i;
+                n--;
+                ans.eb(tmpx);
+            }
+
+            // for(int x:ans)
+            //     cout<<x<<' ';
+            // cout<<endl;
+
+
+            // cout<<"ADFASD222F:"<<n<<endl;
+            while(x-i>0&&n){
+                n--,x-=i;
+                ans.eb(x);
+            }
+            // cout<<"ADFASDF:"<<n<<endl;
+
+            // for(int x:ans)
+            //     cout<<x<<' ';
+            // cout<<endl;
+
+            while(n){
+                n--;
+                y+=i;
+                ans.eb(y);
+            }
+        }
     }
-    rep1(i, n) { cnt.pb(mp(arr[i], (i * i) % c)); }
-    sort(all(cnt), [](pii a, pii b) { return a.F > b.F; });
-    int s = 0, ans = 0;
-    for (pii x : cnt) {
-        s += x.S;
-        ans = max(ans, s * x.F);
-    }
-    cout << ans << endl;
+    for(int x:ans)
+        cout<<x<<' ';
+    cout<<endl;
 }
 
 int32_t main() {
-    IOS;
+    // IOS;
     int t;
     cin >> t;
     rep(i, t) {
-        cout << "Case " << i + 1 << ": ";
+        // cout << "Case " << i + 1 << ": ";
         solve();
     }
     return 0;
