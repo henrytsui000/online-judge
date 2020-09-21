@@ -1,48 +1,51 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
-#define IOS ios_base::sync_with_stdio(0);cin.tie(0)
+#define IOS                       \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0)
 #define endl '\n'
-
-
-
 using ll = long long;
 
-const int maxn = 1e5+5;
+const int maxn = 1e5 + 5;
 
 struct node {
-    node *rc, lc;
-    int l, r;
-    int val;
-    void push() { val = min(rc->val, lc->val); }
+    node *lc, *rc;
+    int l, r, val, lz;
+    void pull() { val = lc->val + rc->val; };
+    void push() { lc->lz += lz, rc->lz += lz, lz = 0; }
 };
 
 int arr[maxn];
 
-node* root;
+node* root = new node{0, 0, 0, 0, 0, 0};
 
-node* build(int l, int r) {
-    if (l == r - 1) {
-        return new node { 0, 0, l, r, arr[l]; }
+void add(int l, int r, int x, node* nd) {
+    // cout<<nd->l<<' '<<nd->r<<endl;
+    if (nd->l == l && nd->r == r) {
+        nd->val += x, nd->lz = x;
+        return;
     }
-    int mid = (l + r) >> 1;
-    node* ret;
-    ret->lc = build(l, mid);
-    ret->rc = build(mid, r);
-    ret->push();
-    return ret;
+    if (nd->l + 1 == nd->r) return;
+    int mid = (nd->l + nd->r) >> 1;
+    if (!nd->lc) {
+        nd->lc = new node{0, 0, nd->l, mid, 0, 0};
+        nd->rc = new node{0, 0, mid, nd->r, 0, 0};
+    }
+    // nd->push();
+    if (mid < l) {
+        add(l, r, x, nd->rc);
+    } else if (r < mid) {
+        add(l, r, x, nd->lc);
+    } else {
+        add(l, mid, x, nd->lc);
+        add(mid, r, x, nd->rc);
+    }
+    nd->pull();
 }
 
-void chg(int x, int val, node* nd) {
-    int mid = (nd->lc + nd->rc) >> 1;
-    if (x < mid)
-        chg(x, val, nd->lc);
-    else
-        chg(x, val, nd->rc);
-    nd->push();
-}
 int qry(int l, int r, node* nd) {
-    if (l == r - 1) {
+    if (nd->l + 1 == nd->r) {
         return nd->val;
     }
     int mid = (nd->l + nd->r) >> 1;
@@ -51,21 +54,47 @@ int qry(int l, int r, node* nd) {
     else if (r < mid)
         return qry(l, mid, nd->lc);
     else {
-        return min(qry(l, mid, nd->lc), qry(mid, r, nd->rc));
+        return (qry(l, mid, nd->lc)+ qry(mid, r, nd->rc));
     }
 }
 
-int32_t main(){
+void dfs(node* nd) {
+    cout << nd->l << ' ' << nd->r << ' ' << nd->val << endl;
+    if (nd->lc != 0) dfs(nd->lc);
+    if (nd->rc != 0) dfs(nd->rc);
+}
+
+int32_t main() {
+    ifstream fin("st.txt");
+
     int n;
-    cin>>n;
-    rep(i,n)
-        cin>>arr[i];
+    fin >> n;
+    root->l = 0, root->r = n;
+    rep(i, n) {
+        fin >> arr[i];
+        add(i, i + 1, arr[i], root);
+    }
+    // cout<<"---CUT---"<<endl;
+    // dfs(root);
     int q;
-    cin>>q;
-    while(q--){
-        int a,b;
-        cin>>a>>b;
-        qry(a,b,root);
+    fin >> q;
+    while (q--) {
+        string str;
+        fin >> str;
+        if (str == "qry") {
+            int a, b;
+            fin >> a >> b;
+            cout << qry(a, b, root);
+        } else if (str == "add") {
+            int l, r, x;
+            fin >> l >> r >> x;
+            add(l, r, x, root);
+        }
     }
     return 0;
 }
+
+/*
+5
+3 5 1 2 4
+*/
