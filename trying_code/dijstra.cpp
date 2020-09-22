@@ -27,7 +27,7 @@ int arr[maxn];
 int node[maxn];
 
 vector<pii> edge[maxn];
-priority_queue<pii,vector<pii>,greater<pii>>pri,t;
+priority_queue<pii, vector<pii>, greater<pii>> pri, t;
 
 int dsu[maxn], siz[maxn];
 bool vis[maxn];
@@ -36,14 +36,9 @@ int n;
 void init() { rep(i, n) dsu[i] = i, siz[i] = 1; }
 
 void dfs(int np) {
-    // cout<<np<<' ';
     vis[np] = 1;
-    for (pii x : edge[np]){
-        // cout<<np<<' '<< x.X<<' '<< x.Y<<endl;
-        if (!vis[x.X]) {
-            pri.push({node[np] + x.Y, x.X});
-        }
-    }
+    for (pii x : edge[np])
+        if (!vis[x.X]) pri.push({node[np] + x.Y, x.X});
     while (!pri.empty()) {
         pii p = pri.top();
         pri.pop();
@@ -53,17 +48,6 @@ void dfs(int np) {
             return;
         }
     }
-}
-
-
-void test(){
-    rep(i,10)
-        t.push({10-i,i});
-    while(!t.empty()){
-        cout<<(t.top().X)<<' ';
-        t.pop();
-    }
-    cout<<endl;
 }
 
 int32_t main() {

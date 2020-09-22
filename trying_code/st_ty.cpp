@@ -33,7 +33,7 @@ void add(int l, int r, int x, node* nd) {
         nd->rc = new node{0, 0, mid, nd->r, 0, 0};
     }
     // nd->push();
-    if (mid < l) {
+    if (l > mid) {
         add(l, r, x, nd->rc);
     } else if (r < mid) {
         add(l, r, x, nd->lc);
@@ -45,16 +45,15 @@ void add(int l, int r, int x, node* nd) {
 }
 
 int qry(int l, int r, node* nd) {
-    if (nd->l + 1 == nd->r) {
-        return nd->val;
-    }
+    printf("[%d, %d) -> %d\n", nd->l, nd->r, nd->val);
+    if (nd->l == l && nd->r == r) return nd->val;
     int mid = (nd->l + nd->r) >> 1;
-    if (l > mid)
-        return qry(mid, r, nd->rc);
-    else if (r < mid)
-        return qry(l, mid, nd->lc);
+    if (l >= mid)
+        return qry(l, r, nd->rc);
+    else if (r <= mid)
+        return qry(l, r, nd->lc);
     else {
-        return (qry(l, mid, nd->lc)+ qry(mid, r, nd->rc));
+        return (qry(l, mid, nd->lc) + qry(mid, r, nd->rc));
     }
 }
 
@@ -75,20 +74,21 @@ int32_t main() {
         add(i, i + 1, arr[i], root);
     }
     // cout<<"---CUT---"<<endl;
-    // dfs(root);
+    dfs(root);
     int q;
-    fin >> q;
-    while (q--) {
-        string str;
-        fin >> str;
+    // cin >> q;
+    string str;
+    while (cin >> str) {
         if (str == "qry") {
             int a, b;
-            fin >> a >> b;
-            cout << qry(a, b, root);
+            cin >> a >> b;
+            cout << qry(a, b, root) << endl;
         } else if (str == "add") {
             int l, r, x;
-            fin >> l >> r >> x;
-            add(l, r, x, root);
+            cin >> l >> r >> x;
+            add(l, r-1, x, root);
+        } else if (str == "dfs") {
+            dfs(root);
         }
     }
     return 0;
