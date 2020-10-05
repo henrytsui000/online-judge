@@ -86,7 +86,7 @@ int32_t main() {
         } else if (str == "add") {
             int l, r, x;
             cin >> l >> r >> x;
-            add(l, r-1, x, root);
+            add(l, r - 1, x, root);
         } else if (str == "dfs") {
             dfs(root);
         }
