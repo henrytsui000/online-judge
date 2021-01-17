@@ -8,6 +8,7 @@ int main() {
             cout << "*";
             j++;
         }
+        //trying
         cout << endl;
         i++;
     }
