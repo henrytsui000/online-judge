@@ -12,7 +12,6 @@ const int maxn = 1e5+5;
 int32_t main(){
     int a, b;
     cin>>a>>b;
-    if(a>b)cout<<a+b<<endl;
-    else cout<<0<<endl;
+    cout<<a+b<<endl;
     return 0;
 }

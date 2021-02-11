@@ -8,11 +8,19 @@ using ll = long long;
 #define rep(i,n) for(int i=0;i<(int)n;i++)
 #define eb emplace_back
 const int maxn = 1e5+5;
-
+stack<int> st;
 int32_t main(){
-    int a, b;
-    cin>>a>>b;
-    if(a>b)cout<<a+b<<endl;
-    else cout<<0<<endl;
+    int n;
+    cin>>n;
+    rep(i,n){
+        int a;cin>>a;
+        if(a>0)st.push(a);
+        else st.push(0);
+    }
+    while(sz(st)){
+        cout<<st.top()<<' ';
+        st.pop();
+    }
+    cout<<endl;
     return 0;
 }

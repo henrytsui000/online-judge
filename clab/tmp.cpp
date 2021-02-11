@@ -5,23 +5,26 @@ using namespace std;
 int n;
 
 void get_input() {
+    ofstream iout("pH_input.txt");
+    n = (rand() % 40 + 50);
+    iout << n << endl;
 }
 
 void get_answer() {
-    ofstream aout("pG_answer.txt");
-    aout << "Hello world!" << endl;
+    ofstream aout("pH_answer.txt");
 }
 
 int main() {
     bool flag = 0;
+    srand(time(0));
     rep(i, 10) {
         get_input();
         get_answer();
-        system("pG.exe > pG.txt");
-        if (system("fc pG.txt pG_answer.txt")) flag = true;
+        system("pH.exe < pH_input.txt > pH.txt");
+        if (system("fc pH.txt pH_answer.txt")) flag = true;
     }
     if (flag) cout << "Wrong Answer" << endl;
     else cout << "Correct!" << endl;
-    system("del pG_input.txt pG_answer.txt pG.txt");
+    system("del pH_input.txt pH_answer.txt pH.txt");
     system("pause");
 }
