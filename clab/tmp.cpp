@@ -5,13 +5,13 @@ using namespace std;
 int n;
 
 void get_input() {
-    ofstream iout("pH_input.txt");
+    ofstream iout("pK_input.txt");
     n = (rand() % 40 + 50);
     iout << n << endl;
 }
 
 void get_answer() {
-    ofstream aout("pH_answer.txt");
+    ofstream aout("pK_answer.txt");
 }
 
 int main() {
@@ -20,11 +20,11 @@ int main() {
     rep(i, 10) {
         get_input();
         get_answer();
-        system("pH.exe < pH_input.txt > pH.txt");
-        if (system("fc pH.txt pH_answer.txt")) flag = true;
+        system("pK.exe < pK_input.txt > pK.txt");
+        if (system("fc pK.txt pK_answer.txt")) flag = true;
     }
     if (flag) cout << "Wrong Answer" << endl;
     else cout << "Correct!" << endl;
-    system("del pH_input.txt pH_answer.txt pH.txt");
+    system("del pK_input.txt pK_answer.txt pK.txt");
     system("pause");
 }
