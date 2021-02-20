@@ -5,20 +5,15 @@ using namespace std;
 int a, b;
 
 void get_input() {
-    ofstream iout("pE_input.txt");
-    a = (rand() % 11 + 1);
-    b = (rand() % 5);
+    ofstream iout("pB_input.txt");
+    a = (rand() % 101 - 50);
+    b = (rand() % 101 - 50);
     iout << a <<' '<< b << endl;
 }
 
-int fab(int n){
-    if(n)   return n * fab(n-1);
-    else return 1;
-}
-
 void get_answer() {
-    ofstream aout("pE_answer.txt");
-    aout << pow(a, b) + (fab(a) / fab(b))<<endl;
+    ofstream aout("pB_answer.txt");
+    aout<<a+b<<endl;
 }
 
 int main() {
@@ -27,11 +22,11 @@ int main() {
     rep(i, 10) {
         get_input();
         get_answer();
-        system("pE.exe < pE_input.txt > pE.txt");
-        if (system("fc pE.txt pE_answer.txt")) flag = true;
+        system("pB.exe < pB_input.txt > pB.txt");
+        if (system("fc pB.txt pB_answer.txt")) flag = true;
     }
     if (flag) cout << "Wrong Answer" << endl;
     else cout << "Correct!" << endl;
-    system("del pE_input.txt pE_answer.txt pE.txt");
+    system("del pB_input.txt pB_answer.txt pB.txt");
     system("pause");
 }

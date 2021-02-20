@@ -11,8 +11,10 @@ using ll = long long;
 #define eb emplace_back
 const int maxn = 1e5 + 5;
 
-int32_t main()
-{
-    cout << "Hello world!\n";
+int32_t main(){
+    int n, cnt = 0;
+    cin >> n;
+    for (; n != 1; cnt++, n = (n % 2 ? n * 3 + 1 : n / 2)) ;
+    cout << cnt << endl;
     return 0;
 }

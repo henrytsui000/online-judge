@@ -2,22 +2,22 @@
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
 
-int n, cnt;
-int gogo(int n){
-    return cnt++, n == 1 ? 0 : gogo((n % 2) ? n * 3 + 1 : n / 2);
-}
+int a, b;
 
 void get_input() {
     ofstream iout("pD_input.txt");
-    n = (rand() % 100 + 1);
-    iout << n << endl;
+    a = (rand() % 101);
+    b = (rand() % (a+1));
+    iout << a <<' '<< b << endl;
 }
 
 void get_answer() {
     ofstream aout("pD_answer.txt");
-    cnt = 0;
-    gogo(n);
-    aout << cnt - 1 << endl;
+    for(int i = 0 ; i <= 1000;i++)
+        if(i*a > b*1000){
+            aout<<i-1<<endl;
+            break;
+        }
 }
 
 int main() {
