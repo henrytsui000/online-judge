@@ -19,7 +19,7 @@ void get_input() {
 void get_answer() {
     ofstream aout("pG_answer.txt");
     for (int i = n - 1; i >= 0; i--)
-        if (vec[i] > 0) aout << vec[i] << ' ';
+        if (vec[i] < 0) aout << vec[i] << ' ';
         else aout << 0 << ' ';
     aout << endl;
 }

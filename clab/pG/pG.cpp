@@ -14,7 +14,7 @@ int32_t main(){
     cin>>n;
     rep(i,n){
         int a;cin>>a;
-        if(a>0)st.push(a);
+        if(a<0)st.push(a);
         else st.push(0);
     }
     while(sz(st)){
