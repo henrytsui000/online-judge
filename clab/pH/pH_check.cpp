@@ -13,7 +13,7 @@ void get_input() {
 
 void get_answer() {
     ofstream aout("pH_answer.txt");
-    aout<<__gcd(a,b)<<endl;
+    aout<<(a*b)/__gcd(a,b)<<endl;
 }
 
 int main() {
