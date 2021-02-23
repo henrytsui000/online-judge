@@ -18,7 +18,7 @@ int fab(int n){
 
 void get_answer() {
     ofstream aout("pE_answer.txt");
-    aout << pow(a, b) + (fab(a) / fab(b))<<endl;
+    aout << (int)(pow(a, b) + 0.5) + (fab(a) / fab(b))<<endl;
 }
 
 int main() {
