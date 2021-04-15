@@ -32,7 +32,7 @@ void solve(){
 int32_t main(){
     IOS;
     int t;
-    cin>>t;
+    cin >> t;
     while(t--){
         solve();
     }
