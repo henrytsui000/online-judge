@@ -1,9 +1,7 @@
-#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
 int main(){
-    system("a.out > a.txt");
-    system("b.out > b.txt");
-    if(system("fc a.txt b.txt"))
-        cout << "fuck" <<endl;
+    int a = 0;
+    a++;
     return 0;
 }
