@@ -1,21 +1,30 @@
 #include<bits/stdc++.h>
-#define MAXN 30005
-#define f for(int i=0;i<MAXN;i++)
 using namespace std;
+#define rep(i,n) for(int i = 0; i <(int)n ;i ++)
+#define endl '\n'
+const int maxn = 2e5+5;
+using pii = pair<int,int>;
+#define F first
+#define S second
+vector<pii> vec;
+
 int main(){
-	int N,arr[MAXN];
-	while(cin>>N){
-		f arr[i]=0;
-		int a,mx=0;
-		for(int i=0;i<N;i++){
-			cin>>a;
-			arr[a]++;
-		}
-		f
-			mx=max(arr[i],mx);
-		f
-			if(mx==arr[i])
-				cout<<i<<' '<<mx<<endl;
-	}
-	return 0;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    int n;
+    cin>>n;
+    for(int i = 0; i < n; i++){
+        int time_in, time_out;
+        cin >> time_in >> time_out;
+        vec.emplace_back(make_pair(time_in, 1));
+        vec.emplace_back(make_pair(time_out, -1));
+    }
+    sort(vec.begin(), vec.end());
+    int mx = 0, now_people = 0;
+    for(pii x: vec){
+        now_people+=x.second;
+        mx = max(mx, now_people);
+    }
+    cout << mx << endl;
+    return 0;
 }
