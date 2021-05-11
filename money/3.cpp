@@ -1,9 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
+#define sz(a) ((int)a.size())
+ifstream fin("3.in");
+ofstream fout("3.out");
 
 struct mat {
     int arr[2][2];
+    void Zero() { arr[0][0] = arr[0][0] = arr[0][0] = arr[0][0] = 1; }
 };
 
 mat muti(mat a, mat b) {
@@ -23,23 +27,30 @@ void mypow(mat a, int b) {
         a = muti(a, a);
         b >>= 1;
     }
-    cout << ans.arr[0][0] << endl;
+    fout << ans.arr[0][0] << endl;
 }
 
-int main() {
+void solve() {
     mat a;
     int n;
+    ans.Zero(), a.Zero();
     ans.arr[0][0] = ans.arr[1][0] = 1;
     a.arr[0][1] = 1, a.arr[1][1] = 0;
     a.arr[0][0] = 1, a.arr[1][0] = 1;
-    cin >> n;
-    if (n < 33)
+    fin >> n;
+    if (n < 2)
+        fout << 1 << endl;
+    else if (n < 33)
         mypow(a, n - 2);
     else
-        cout << "overflow\n";
-    return 0;
+        fout << "overflow\n";
 }
 
-int main(){
-    
+int32_t main() {
+    rep(i,10) {
+        fout <<"case "<<i+1<<":\n";
+        solve();
+        fout << endl;
+    }
+    return 0;
 }
