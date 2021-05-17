@@ -9,7 +9,17 @@ using ll = long long;
 #define eb emplace_back
 const int maxn = 1e5+5;
 
+void hanoi(int n, int a, int b, int c) {
+    if (!n) return;
+    hanoi(n - 1, a, c, b);
+    cout << char('A' + a) << "->" << char('A' + c) << endl;
+    hanoi(n - 1, b, a, c);
+}
 
+void gogo(int n) {
+    cout << (1 << n) - 1 << endl;
+    hanoi(n, 0, 2, 1);
+}
 
 void solve(){
     int n;
