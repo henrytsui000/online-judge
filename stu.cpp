@@ -1,20 +1,33 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
+#define IOS                       \
+    ios_base::sync_with_stdio(0); \
+    cin.tie(0)
+#define endl '\n'
+#define all(a) a.begin(), a.end()
+#define sz(a) ((int)a.size())
+#define rep(i, n) for (int i = 0; i < (int)n; i++)
+#define eb emplace_back
+const int maxn = 1e5 + 5;
 
-int main() {
-    int n, a, b;
-    cin >> n;
-    vector<pair<int,int> > vec(n);
-    for (int i = 0; i < n; i++) {
-        cin >> a >> b;
-        vec[i] = make_pair(a, b);
+int f(int a[], int n, int x) {
+    int l = 0, r = n - 1;
+    x--;
+    while (l != r) {
+        int mid = (l + r) / 2;
+        if (a[mid] <= x)
+            l = mid + 1;
+        else
+            r = mid;
     }
-    sort(vec.begin(), vec.end());
-    long long total = 0, curr = 0;
-    for (auto x : vec) {
-        curr += x.first;
-        total += x.second - curr;
+    return l - 1;
+}
+
+int32_t main() {
+    int arr[10] = {0, 2, 3, 5, 7, 10, 13, 15, 19, 20};
+    rep(i, 50) {
+        cout << i << ' ' << f(arr, 10, i) << endl;
     }
-    cout << total;
     return 0;
 }

@@ -1,0 +1,22 @@
+module prob(n11 n12 n13 n1 n2 n3)
+//esadfjliasjdgoilfjasdoif
+output n11 1 n12 1 n13 1
+//esadfjliasjdgoilfjasdoif
+input n1 1 n2 1 n3 1
+//esadfjliasjdgoilfjasdoif
+wire n4 0 n5 0 n6 1 n7 1 n8 0 n9 0 n10 0 
+INV g1 n4 n1
+INV g2 n5 n2
+NAND2 g3 n6 n4 n5
+//esadfjliasjdgoilfjasdoif
+INV g4 n7 n5
+NOR2 g5 n8 n4 n3
+
+INV g6 n9 n6
+NOR2 g7 n10 n6 n7
+NAND2 g8 n11 n7 n8
+NOR2 g9 n12 n9 n10
+NOR2 g10 n13 n10 n8
+//esadfjliasjdgoilfjasdoif
+endmodule
+//esadfjliasjdgoilfjasdoif
