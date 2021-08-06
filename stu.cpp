@@ -7,27 +7,28 @@ using ll = long long;
 #define endl '\n'
 #define all(a) a.begin(), a.end()
 #define sz(a) ((int)a.size())
+
 #define rep(i, n) for (int i = 0; i < (int)n; i++)
+
 #define eb emplace_back
 const int maxn = 1e5 + 5;
 
-int f(int a[], int n, int x) {
-    int l = 0, r = n - 1;
-    x--;
-    while (l != r) {
-        int mid = (l + r) / 2;
-        if (a[mid] <= x)
-            l = mid + 1;
-        else
-            r = mid;
-    }
-    return l - 1;
-}
-
 int32_t main() {
-    int arr[10] = {0, 2, 3, 5, 7, 10, 13, 15, 19, 20};
-    rep(i, 50) {
-        cout << i << ' ' << f(arr, 10, i) << endl;
+    const int n = 10;
+    int arr[n];
+
+    arr[4] = 13;
+
+    for (int xx = 0; xx < (int)n; xx++) {
+        arr[xx] = xx + 1;
     }
+    random_shuffle(arr, arr + n);
+    rep(i,n) {
+        cout << arr[i] << ' ';
+        rep(j, 3) {
+            cout << "wAHAHA" << endl;
+        }
+    }
+    cout << endl;
     return 0;
 }
