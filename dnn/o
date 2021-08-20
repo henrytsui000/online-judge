@@ -1,0 +1,42 @@
+p1
+g1 1
+g2 1
+g3 1
+g4 0
+g5 0
+g6 1
+g7 0
+g8 0
+g9 0
+g10 1
+g11 0
+g12 1
+Delay Time: 11
+p2
+g1 0
+g2 1
+g3 1
+g4 1
+g5 0
+g6 0
+g7 1
+g8 0
+g9 1
+g10 0
+g11 0
+g12 1
+Delay Time: 11
+p3
+g1 0
+g2 0
+g3 0
+g4 1
+g5 1
+g6 1
+g7 1
+g8 0
+g9 0
+g10 0
+g11 0
+g12 1
+Delay Time: 11

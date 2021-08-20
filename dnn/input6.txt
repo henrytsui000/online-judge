@@ -1,0 +1,14 @@
+S -> A
+S -> G
+S -> P
+A -> K
+K -> A
+A -> S
+A -> G
+P -> S
+G -> S
+G -> B
+B -> G
+G -> T
+T -> G
+Obstacle X

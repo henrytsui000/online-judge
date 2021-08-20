@@ -1,0 +1,32 @@
+S -> A
+A -> K
+K -> A
+A -> S
+S -> B
+B -> P
+P -> B
+B -> S
+S -> C
+C -> G
+G -> T
+C -> D
+D -> C
+D -> E
+E -> D
+Obstacle D
+S A
+A K
+A S
+K A
+S B
+S C
+B P
+B S
+P B
+C G
+C D
+G T
+D C
+D E
+E D
+

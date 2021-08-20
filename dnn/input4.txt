@@ -1,0 +1,16 @@
+S -> A
+A -> D
+D -> C
+C -> F
+F -> K
+K -> P
+A -> P
+P -> C
+C -> P
+S -> B
+B -> P
+P -> G
+K -> T
+G -> T
+B -> T
+Obstacle iadd
