@@ -1,0 +1,93 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs < rhs ? true : (lhs = rhs, false);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs > rhs ? true : (lhs = rhs, false);}
+
+const int maxn=1e9;
+
+bitset<maxn/2+1> prime;
+vector<int> P;
+set<int> s;
+
+void solve() {
+    /* do something */
+    int n;  cin >> n;
+    int cnt=0;
+    vector<int> Pfactor;
+    while(n>1){
+        if(cnt>=P.size()){
+           Pfactor.emplace_back(n);
+           break;
+        }
+        if(n%P[cnt]==0){
+            Pfactor.emplace_back(P[cnt]);
+            n/=P[cnt];
+        }
+        else ++cnt;
+    }
+    /*
+    cout << "actor\n";
+    for(int &x:Pfactor) cout << x << " ";
+    */
+    s.clear();  s.insert(1);
+    set<int> tmp;   tmp.insert(1);
+    for(int i=0;i<Pfactor.size();++i){
+        for(auto iter=s.begin();iter!=s.end();++iter)
+            tmp.insert(*iter*Pfactor[i]);
+        s=tmp;
+    }
+    /*
+    cout << "debug\n";
+    for(auto iter=s.begin();iter!=s.end();++iter)   cout << *iter << " ";
+    */
+    vector<int> ans;
+    for(auto iter=next(s.begin());iter!=s.end();++iter)
+        if(*iter-*prev(iter)==1)
+            ans.emplace_back(*iter-1);
+    if(ans.empty()) cout << "-1\n";
+    else{
+        for(int &x:ans) cout << x << " ";
+        cout << '\n';
+    }
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1;  cin >> t;
+    P.emplace_back(2);
+    for(int i=3;i<maxn;i+=2){
+        if(!prime[i>>1]){
+            for(int j=i*i;j<maxn;j+=2*i)
+                prime[j>>1]=1;
+            P.emplace_back(i);
+        }
+    }
+    // for(int i=0;i<P.size();++i) cout << P[i] << " ";
+    
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}

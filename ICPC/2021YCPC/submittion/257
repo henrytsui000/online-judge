@@ -1,0 +1,69 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+#define endl '\n'
+
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs < rhs ? true : (lhs = rhs, false);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs > rhs ? true : (lhs = rhs, false);}
+
+int dp[170][170][15];
+
+void solve() {
+    /* do something */
+    int a, b;
+    char c;
+    cin >> a >> c >> b;
+    bool flag=false;
+    if(dp[a][b][13]>=(1<<6) || dp[a][b][9]>(1<<6))  flag=true;
+    if(flag)    cout << "YES\n";
+    else    cout << "NO\n";
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1;
+    dp[0][0][7]=1;
+    for(int i=0;i<=80;++i){
+        for(int j=0;j<=80;++j){
+            for(int g=0;g<15;++g){
+                for(int a=0;a<=80;++a){
+                    for(int b=0;b<=80;++b){
+                        if((abs(a-b)==2 && max(a,b)>4) || (max(a,b)==4 && a!=b)){
+                            if(a>b && g+1<15)
+                                dp[a+i][b+j][g+1]|=(dp[i][j][g]<<1);
+                            else if(g>0)
+                                dp[a+i][b+j][g-1]|=(dp[i][j][g]<<1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    cin >> t;
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}

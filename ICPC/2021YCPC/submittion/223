@@ -1,0 +1,73 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs < rhs ? true : (lhs = rhs, false);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs > rhs ? true : (lhs = rhs, false);}
+
+const int INF = 1E15;
+const int maxn = 10000 * 5 + 5;
+
+bitset<maxn> dp;
+
+int divceil(int a, int b) {
+    return (a - 1) / b + 1;
+}
+
+void solve() {
+    int N, w1, w2; cin >> N >> w1 >> w2;
+    
+    int sum = 0;
+    vector<int> vec(N);
+    for (auto &x : vec) cin >> x, sum += x;
+    sort(ALL(vec));
+    
+    int midpoint = sum * w1 / (w1 + w2);
+    int startpoint = max(midpoint - 22000, (int)0);
+    
+    int ans = INF, now_sum = 0, now_st = 0;
+    dp.reset(); dp[0] = 1;
+    for (auto x : vec) {
+        now_sum += x;
+        dp = dp | (dp << x);
+        if (now_st < startpoint and now_sum - now_st > maxn / 2) {
+            dp = dp >> 2000, now_st += 2000;
+        }
+    }
+    for (int i = 0, j = now_st; i < maxn; ++i, ++j) {
+        // cout << dp[i];
+        if (dp[i]) {
+            chmin(ans, max(divceil(j, w1), divceil(sum-j, w2)));
+        }
+    }
+    cout << ans << "\n";
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1; cin >> t;
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}

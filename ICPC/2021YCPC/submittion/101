@@ -1,0 +1,53 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs > rhs ? true : (lhs = rhs, false);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs < rhs ? true : (lhs = rhs, false);}
+
+void solve() {
+    int goal, N; cin >> goal >> N;
+    
+    vector<int> vec(N);
+    for (auto &x : vec) cin >> x;
+    sort(ALL(vec));
+    vec.resize(unique(ALL(vec)) - begin(vec));
+    
+    vector<int> dp(goal+1, 0);
+    dp[0] = 1;
+    
+    for (auto x : vec) {
+        for (int i = x; i <= goal; ++i) dp[i] += dp[i-x];
+    }
+    
+    cout << dp[goal] << "\n";
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1; // cin >> t;
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}

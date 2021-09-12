@@ -1,0 +1,113 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+// #define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs <= rhs ? false : (lhs = rhs, true);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs >= rhs ? false : (lhs = rhs, true);}
+
+const int INF = INT_MAX;
+const int maxn = 10000 + 5;
+
+vector<pii> adj[maxn]; /// (to, cost)
+vector<pair<long long, long long>> DDIS(maxn,{INF,INF}); 
+
+void solve() {
+    int N, M, K; cin >> N >> M >> K;
+    
+    map<string, int> disc;
+    vector<int> total_influence(N+1), moonstone(N+1), influence(N+1);
+    vector<vector<int>> dist(N+1, vector<int>(N+1, INF));
+    
+    string start, destination; cin >> start >> destination;
+    
+    for (int i = 1; i <= N; ++i) {
+        string name; cin >> name;
+        disc[name] = i;
+        cin >> moonstone[i] >> influence[i];
+    }
+    
+    for (int i = 1; i <= M; ++i) {
+        string name1, name2; cin >> name1 >> name2;
+        int id1 = disc[name1], id2 = disc[name2], cost; cin >> cost;
+        adj[id1].eb(id2, cost), adj[id2].eb(id1, cost);
+    }
+    
+    for (int i = 1; i <= N; ++i) {
+        queue<int> que; que.push(i);
+        dist[i][i] = 0;
+        while (!que.empty()) {
+            int now = que.front(); que.pop();
+            for (auto [to, cost] : adj[now]) {
+                if (chmin(dist[i][to], dist[i][now] + 1)) que.push(to);
+            }
+        }
+    }
+    
+    for (int i = 1; i <= N; ++i) {
+        for (int j = 1; j <= N; ++j) {
+            if (i != j and dist[i][j] <= K) total_influence[i] += influence[j];
+        }
+    }
+    
+    for (int i = 1; i <= N; ++i) {
+        for (auto &[to, cost] : adj[i]) {
+            cost += total_influence[i];
+            // cout << i << "," << to << ": " << cost << "\n";
+        }
+    }
+    
+    int s_id = disc[start], t_id = disc[destination];
+    DDIS[s_id]={0,moonstone[s_id]};
+    prior<pair<pair<long long,long long>,int>> pq;  pq.push({{DDIS[s_id].first,-DDIS[s_id].second},s_id});
+    while(!pq.empty()){
+        pair<pair<long long,long long>,int> now=pq.top();   pq.pop();
+        if(now.first.first!=DDIS[now.second].first && now.first.second != -DDIS[now.second].second) continue;
+        if(now.second==t_id)    break;
+        for(int i=0;i<adj[now.second].size();++i){
+            long long COST = adj[now.second][i].second;
+            int nnt=adj[now.second][i].first;
+            if(COST+DDIS[now.second].first<DDIS[nnt].first){
+                DDIS[nnt].first=COST+DDIS[now.second].first;
+                DDIS[nnt].second=moonstone[nnt]+DDIS[now.second].second;
+                pq.push({{DDIS[nnt].first,-DDIS[nnt].second},nnt});
+            }
+            else if(COST+now.first.first==DDIS[nnt].first and DDIS[nnt].second<moonstone[nnt]+DDIS[now.second].second){
+                DDIS[nnt].second=moonstone[nnt]+DDIS[now.second].second;
+                pq.push({{DDIS[nnt].first,-DDIS[nnt].second},nnt});
+            }
+        }
+    }
+
+    // for(int i=1;i<=N;++i)   cout << i << ": " << DDIS[i].first << " , " << DDIS[i].second << '\n';
+    
+    cout << DDIS[t_id].first << " " << DDIS[t_id].second << '\n';
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1; // cin >> t;
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}

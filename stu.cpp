@@ -1,18 +1,25 @@
-void setup() {
-   Serial.begin(9600);
-   int sensorValue = analogRead(A0);
-   float voltage = sensorValue * (5.0 / 1023.0);
-   Serial.println(voltage);
-   if(voltage < 2.5){
-   Serial.println("Dora");
+#include<bits/stdc++.h>
+using namespace std;
 
-   }else{
-   Serial.println("Cora");
-   }
+string arr[5][4];
+vector<pair<string, string> > vec;
+
+void init(){
+    vec.emplace_back({"12", "34"});
+    vec.emplace_back({"13", "24"});
+    vec.emplace_back({"14", "23"});
 }
 
+void gogo(){
+   
+}
 
-void loop() {
-    
-  analogWrite(ledPin, val / 4); // analogRead values go from 0 to 1023, analogWrite values from 0 to 255
+void find_sol(){
+    gogo();
+
+}
+
+int main(){
+    init();
+    find_sol();
 }

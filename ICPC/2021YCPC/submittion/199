@@ -1,0 +1,90 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+// #define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+
+mt19937_64 rng(142857);
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs < rhs ? true : (lhs = rhs, false);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs > rhs ? true : (lhs = rhs, false);}
+
+const int maxn = 10000 + 5;
+
+short rng_cnt[2*maxn+1][maxn];
+
+void solve() {
+    int N; cin >> N;
+    
+    vector<pii> pq(N);
+    for (auto &[p, q] : pq) cin >> p >> q;
+    
+    /*
+    for (int i = 0; i < N; ++i) {
+        ++rng_cnt[pq[i].X][i], ++rng_cnt[pq[i].Y][i];
+    }
+    
+    for (int i = 1; i <= 2*N; ++i) {
+        partial_sum(rng_cnt[i], rng_cnt[i] + N, rng_cnt[i]);
+    }
+    
+    auto rng_qry = [&](int val, int L, int R) -> int {
+        return (int)(rng_cnt[val][R] - (L ? rng_cnt[val][L-1] : 0));
+    };
+    
+    int flag = 1;
+    for (int random_cnt = 1; random_cnt <= 10; ++random_cnt) {
+        int p = rng() % (max_nxt - now) + now;
+        if (pq[p].X == v1 or pq[p].Y == v1 or pq[p].X == v2 or pq[p].Y == v2);
+        else {flag = 0; break;}
+    }
+    if (!flag or rng_qry(v1, now, max_nxt-1) + rng_qry(v2, now, max_nxt-1) < max_nxt - now) continue;
+    */
+    
+    int now = 0, cnt = 0;
+    while (now < N) {
+        int max_nxt = now+1;
+        for (int v1 = pq[now].X, v2 = 1; v2 <= 2*N; ++v2) {
+            for (int i = now+1; i <= N; ++i) {
+                if (i < N and (pq[i].X == v1 or pq[i].Y == v1 or pq[i].X == v2 or pq[i].Y == v2));
+                else {chmax(max_nxt, i); break;}
+            }
+        }
+        
+        for (int v1 = pq[now].Y, v2 = 1; v2 <= 2*N; ++v2) {
+            for (int i = now+1; i <= N; ++i) {
+                if (i < N and (pq[i].X == v1 or pq[i].Y == v1 or pq[i].X == v2 or pq[i].Y == v2));
+                else {chmax(max_nxt, i); break;}
+            }
+        }
+        now = max_nxt, ++cnt;
+    }
+    cout << cnt << "\n";
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1; // cin >> t;
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}

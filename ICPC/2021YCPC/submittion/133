@@ -1,0 +1,64 @@
+#pragma GCC optimize("Ofast", "unroll-loops")
+#include <bits/stdc++.h>
+using namespace std;
+
+#define int long long
+#define double long double
+using pii = pair<int, int>;
+template<typename T>
+using Prior = std::priority_queue<T>;
+template<typename T>
+using prior = std::priority_queue<T, vector<T>, greater<T>>;
+
+#define X first
+#define Y second
+#define eb emplace_back
+#define ALL(x) begin(x), end(x)
+#define RALL(x) rbegin(x), rend(x)
+#define fastIO() ios_base::sync_with_stdio(0), cin.tie(0)
+
+template<typename T>
+bool chmin(T &lhs, T rhs) {return lhs < rhs ? true : (lhs = rhs, false);}
+
+template<typename T>
+bool chmax(T &lhs, T rhs) {return lhs > rhs ? true : (lhs = rhs, false);}
+
+const int INF = 1E15;
+const int maxn = 10000 * 100 + 5;
+
+bitset<maxn> dp;
+
+int divceil(int a, int b) {
+    return (a - 1) / b + 1;
+}
+
+void solve() {
+    int N, w1, w2; cin >> N >> w1 >> w2;
+    
+    int sum = 0;
+    dp.reset(), dp[0] = 1;
+    for (int i = 0; i < N; ++i) {
+        int x; cin >> x, sum += x;
+        dp = dp | (dp << x);
+    }
+    
+    int ans = INF;
+    for (int i = 0; i <= sum; ++i) {
+        // cout << dp[i];
+        if (dp[i]) {
+            chmin(ans, max(divceil(i, w1), divceil(sum-i, w2)));
+        }
+    }
+    cout << ans << "\n";
+}
+
+int32_t main() {
+    fastIO();
+    
+    int t = 1; cin >> t;
+    for (int _ = 1; _ <= t; ++_) {
+        solve();
+    }
+    
+    return 0;
+}
