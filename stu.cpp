@@ -1,6 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+#define sz(a) ((int)a.size())
 string arr[5][4];
 vector<pair<string, string> > vec;
 
